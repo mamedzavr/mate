@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Dish } from 'src/app/models/menu.model';
 import { BasketService } from 'src/app/services/basket.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-menu-item',
@@ -11,25 +12,26 @@ export class MenuItemComponent implements OnInit {
   @Input()
   item!: Dish;
   itemCount: number = 0;
+  private subscription!: Subscription;
 
   constructor(public basketService: BasketService) {}
 
   ngOnInit(): void {
-    this.updateItemCount();
+    this.subscription = this.basketService.items$.subscribe(items => {
+      const basketItem = items[this.item.name];
+      this.itemCount = basketItem ? basketItem.quantity : 0;
+    });
   }
 
-  updateItemCount(): void {
-    const basketItem = this.basketService.getItems()[this.item.name];
-    this.itemCount = basketItem ? basketItem.quantity : 0;
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   increaseOrder(): void {
     this.basketService.addItem(this.item);
-    this.updateItemCount();
   }
 
   decreaseOrder(): void {
     this.basketService.removeItem(this.item);
-    this.updateItemCount();
   }
 }

@@ -1,46 +1,54 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Dish, Order, OrderItem } from 'src/app/models/menu.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BasketService {
-  private items: { [key: string]: OrderItem } = {};
+  private itemsSubject = new BehaviorSubject<{ [key: string]: OrderItem }>({});
+
+  get items$() {
+    return this.itemsSubject.asObservable();
+  }
+
+  get order$() {
+    return this.items$.pipe(
+      map(items => {
+        const itemsArray: OrderItem[] = Object.values(items);
+        const total = itemsArray.reduce(
+          (sum, item) => sum + item.dish.price * item.quantity,
+          0,
+        );
+        return { items: itemsArray, total };
+      }),
+    );
+  }
 
   addItem(item: Dish): void {
-    if (this.items[item.name]) {
-      this.items[item.name].quantity++;
+    const items = this.itemsSubject.getValue();
+    if (items[item.name]) {
+      items[item.name].quantity++;
     } else {
-      this.items[item.name] = { dish: item, quantity: 1 };
+      items[item.name] = { dish: item, quantity: 1 };
     }
+    this.itemsSubject.next(items);
   }
 
   removeItem(item: Dish): void {
-    if (this.items[item.name] && this.items[item.name].quantity > 0) {
-      this.items[item.name].quantity--;
-      if (this.items[item.name].quantity === 0) {
-        delete this.items[item.name];
+    const items = this.itemsSubject.getValue();
+    if (items[item.name]?.quantity > 0) {
+      items[item.name].quantity--;
+      if (items[item.name].quantity === 0) {
+        delete items[item.name];
       }
     }
-  }
-
-  getItems(): { [key: string]: OrderItem } {
-    return this.items;
+    this.itemsSubject.next(items);
   }
 
   hasItems(): boolean {
-    return Object.keys(this.items).length > 0;
-  }
-
-  getOrder(): Order {
-    let total = 0;
-    let items: OrderItem[] = [];
-    for (let key in this.items) {
-      items.push(this.items[key]);
-      total += this.items[key].dish.price * this.items[key].quantity;
-    }
-    let serviceFee = total * 0.1; // replace 0.1 with your actual service fee percentage
-    let finalTotal = total + serviceFee;
-    return { items, total, serviceFee, finalTotal };
+    const items = this.itemsSubject.getValue();
+    return Object.keys(items).length > 0;
   }
 }

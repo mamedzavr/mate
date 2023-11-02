@@ -402,8 +402,4 @@ export class MenuListComponent {
   }
 
   ngOnInit(): void {}
-
-  goToCheckout(): void {
-    console.log(this.basketService.getItems());
-  }
 }
