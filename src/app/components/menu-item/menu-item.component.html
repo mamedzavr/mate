@@ -1,0 +1,11 @@
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <img [src]="item.imageUrl" class="card-img-top" alt="{{ item.name }}">
+        <h5 class="card-title">{{ item.name }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">&#8380;{{ item.price }}</h6>
+        <p class="card-text">
+        <ul>
+            <li *ngFor="let ingredient of item.ingredients">{{ ingredient.name }}</li>
+        </ul>
+    </div>
+</div>
