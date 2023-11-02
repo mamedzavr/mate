@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="row text-center" *ngFor="let image of images; let i = index">
+        <div class="col-md-4">
+            <img [src]="image" [style.transform]="'translateX(' + offsets[i] + '%)'" alt="Image"
+                class="img-responsive center-block" />
+        </div>
+        <div class="col-md-4">
+            <p>Текст между изображениями</p>
+        </div>
+        <div class="col-md-4">
+            <img [src]="image" [style.transform]="'translateX(' + (offsets[i] * -1) + '%)'" alt="Image"
+                class="img-responsive center-block" />
+        </div>
+    </div>
+</div>

@@ -10,7 +10,6 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^16.2.11",
     "@angular/common": "^16.2.11",
     "@angular/compiler": "^16.2.11",
     "@angular/core": "^16.2.11",
@@ -24,6 +23,8 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.2.9",
+    "@angular/animations": "^16.2.11",
+    "@angular/cdk": "^16.2.11",
     "@angular/cli": "~16.2.9",
     "@angular/compiler-cli": "^16.2.11",
     "@ng-bootstrap/ng-bootstrap": "^15.1.2",
