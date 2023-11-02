@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-about-us',
@@ -6,33 +6,60 @@ import { Component, HostListener, OnInit, ElementRef, ViewChild } from '@angular
   styleUrls: ['./about-us.component.css'],
 })
 export class AboutUsComponent implements OnInit {
+  public offsets: number[] = [];
   public images = [
     'assets/images/icons/mate_logo.png',
-    'assets/images/icons/mate_logo.png','assets/images/icons/mate_logo.png','assets/images/icons/mate_logo.png','assets/images/icons/mate_logo.png','assets/images/icons/mate_logo.png','assets/images/icons/mate_logo.png','assets/images/icons/mate_logo.png','assets/images/icons/mate_logo.png','assets/images/icons/mate_logo.png','assets/images/icons/mate_logo.png','assets/images/icons/mate_logo.png','assets/images/icons/mate_logo.png',
+    'assets/images/icons/mate_logo.png',
+    'assets/images/icons/mate_logo.png',
+    'assets/images/icons/mate_logo.png',
+    'assets/images/icons/mate_logo.png',
+    'assets/images/icons/mate_logo.png',
+    'assets/images/icons/mate_logo.png',
+    'assets/images/icons/mate_logo.png',
+    'assets/images/icons/mate_logo.png',
+    'assets/images/icons/mate_logo.png',
+    'assets/images/icons/mate_logo.png',
+    'assets/images/icons/mate_logo.png',
+    'assets/images/icons/mate_logo.png',
+    'assets/images/icons/mate_logo.png',
+    'assets/images/icons/mate_logo.png',
+    'assets/images/icons/mate_logo.png',
+    'assets/images/icons/mate_logo.png',
+    'assets/images/icons/mate_logo.png',
+    'assets/images/icons/mate_logo.png',
+    'assets/images/icons/mate_logo.png',
+    'assets/images/icons/mate_logo.png',
+    'assets/images/icons/mate_logo.png',
   ];
-
-  public offsets: number[] = [];
 
   constructor(private el: ElementRef) {}
 
   ngOnInit() {
-    this.onWindowScroll();
+    this.initializeOffsets();
   }
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
-    const viewHeight = window.innerHeight;
-    this.offsets = this.images.map((_, index) => {
-      const imageElement = this.el.nativeElement.querySelectorAll('img')[index];
-      const rect = imageElement.getBoundingClientRect();
-      const isVisible = rect.top < viewHeight && rect.bottom >= 0;
-      const offset = rect.top - viewHeight;
+    this.offsets = this.images.map((_, i) => this.calculateOffset(i));
+  }
 
-      if (isVisible) {
-        const direction = index % 2 === 0 ? 1 : -1;
-        return Math.max(0, Math.min(-offset * direction, 100));
-      }
-      return 0;
-    });
+  private initializeOffsets() {
+    this.offsets = this.images.map(() => 0);
+  }
+
+  private calculateOffset(index: number): number {
+    const element =
+      this.el.nativeElement.querySelectorAll('.img-container')[index];
+    const rect = element.getBoundingClientRect();
+    const direction = index % 2 === 0 ? 1 : -1;
+
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      const visiblePart =
+        Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+      const percentageVisible = visiblePart / (rect.bottom - rect.top);
+
+      return direction * percentageVisible * 50;
+    }
+    return rect.top < 0 ? direction * 50 : 0;
   }
 }
