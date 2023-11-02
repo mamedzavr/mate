@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Dish } from '../../models/menu.model';
+import { BasketService } from 'src/app/services/basket.service';
 
 @Component({
   selector: 'app-menu-list',
@@ -7,6 +8,9 @@ import { Dish } from '../../models/menu.model';
   styleUrls: ['./menu-list.component.css'],
 })
 export class MenuListComponent {
+
+  constructor(public basketService: BasketService) {}
+
   soupItems: Dish[] = [
     {
       name: 'Miso soup',
@@ -396,5 +400,11 @@ export class MenuListComponent {
 
   getItemsByCategory(category: string): Dish[] {
     return this.menuItems.filter(item => item.category === category);
+  }
+
+  ngOnInit(): void {}
+
+  goToCheckout(): void {
+    console.log(this.basketService.getItems());
   }
 }

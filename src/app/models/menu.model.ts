@@ -9,3 +9,15 @@ export interface Dish {
   category: string;
   imageUrl: string; 
 }
+
+export interface OrderItem {
+  dish: Dish;
+  quantity: number;
+}
+
+export interface Order {
+  items: OrderItem[];
+  total: number;
+  serviceFee: number;
+  finalTotal: number;
+}

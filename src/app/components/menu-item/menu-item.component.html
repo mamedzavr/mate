@@ -1,12 +1,18 @@
-<div class="card" style="width: 18rem; border-radius: 20px;">
+<div class="card custom-card">
     <div class="card-body">
-        <img [src]="item.imageUrl" class="card-img-top" alt="{{ item.name }}"
-            style="border-radius: 20px; margin-bottom: 20px;">
+        <img [src]="item.imageUrl" class="card-img-top custom-card-img" alt="{{ item.name }}">
         <h5 class="card-title">{{ item.name }}</h5>
         <h6 class="card-subtitle mb-2 text-muted">&#8380;{{ item.price }}</h6>
         <p class="card-text">
         <ul>
             <li *ngFor="let ingredient of item.ingredients">{{ ingredient.name }}</li>
         </ul>
+        <button *ngIf="itemCount === 0" (click)="increaseOrder()" class="btn btn-primary btn-small">Add to
+            Order</button>
+        <div *ngIf="itemCount > 0" class="order-count">
+            <button (click)="decreaseOrder()" class="btn btn-primary btn-small margin-right">-</button>
+            <span class="margin-right number-display">{{ itemCount }}</span>
+            <button (click)="increaseOrder()" class="btn btn-primary btn-small">+</button>
+        </div>
     </div>
 </div>

@@ -13,6 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     MenuListComponent,
     MenuItemComponent,
     AboutUsComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,

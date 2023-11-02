@@ -1,0 +1,61 @@
+<div *ngIf="basketService.hasItems()" class="container">
+    <h2>Checkout</h2>
+    <div class="row">
+        <div *ngFor="let item of basketService.getItems() | keyvalue" class="col-sm-6 col-md-4 col-lg-3 mb-3">
+            <div class="card custom-card">
+                <div class="card-body">
+                    <img [src]="item.value.dish.imageUrl" class="card-img-top custom-card-img"
+                        alt="{{ item.value.dish.name }}">
+                    <div class="row">
+                        <div class="col-8">
+                            <h5 class="card-title">{{ item.value.dish.name }}</h5>
+                        </div>
+                        <div class="col-4 text-right">
+                            <h6 class="card-subtitle mb-2 text-muted">&#8380;{{ item.value.dish.price }}</h6>
+                        </div>
+                    </div>
+                    <div class="order-count">
+                        <button (click)="decreaseOrder(item.value.dish)" class="btn btn-primary btn-small margin-right">
+                            -
+                        </button>
+                        <span class="margin-right number-display">
+                            {{ item.value.quantity }}
+                        </span>
+                        <button (click)="increaseOrder(item.value.dish)" class="btn btn-primary btn-small">
+                            +
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-6">
+                    <h5>Total:</h5>
+                </div>
+                <div class="col-6">
+                    <h5>&#8380;{{ calculateTotal() }}</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <h5>Service Fee:</h5>
+                </div>
+                <div class="col-6">
+                    <h5>&#8380;{{ calculateServiceFee() }}</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <h4 class="mt-3">Final Total:</h4>
+                </div>
+                <div class="col-6">
+                    <h4 class="mt-3">&#8380;{{ calculateFinalTotal() }}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
