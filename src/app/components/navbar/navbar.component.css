@@ -8,3 +8,7 @@
 .active a {
     color: white;
 }
+
+.nav-item a {
+    padding-left: 10px;
+}
