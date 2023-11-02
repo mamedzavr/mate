@@ -37,7 +37,7 @@
                     <h5>Total:</h5>
                 </div>
                 <div class="col-6">
-                    <h5>&#8380;{{ calculateTotal() }}</h5>
+                    <h5>&#8380;{{ total$ | async | number:'1.2-2' }}</h5>
                 </div>
             </div>
             <div class="row">
@@ -45,7 +45,7 @@
                     <h5>Service Fee:</h5>
                 </div>
                 <div class="col-6">
-                    <h5>&#8380;{{ calculateServiceFee() }}</h5>
+                    <h5>&#8380;{{ serviceFee$ | async | number:'1.2-2' }}</h5>
                 </div>
             </div>
             <div class="row">
@@ -53,7 +53,7 @@
                     <h4 class="mt-3">Final Total:</h4>
                 </div>
                 <div class="col-6">
-                    <h4 class="mt-3">&#8380;{{ calculateFinalTotal() }}</h4>
+                    <h4 class="mt-3">&#8380;{{ finalTotal$ | async | number:'1.2-2' }}</h4>
                 </div>
             </div>
         </div>

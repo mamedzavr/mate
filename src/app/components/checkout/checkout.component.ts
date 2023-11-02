@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject, Observable, interval } from 'rxjs';
+import { map, scan, take } from 'rxjs/operators';
 import { Dish } from 'src/app/models/menu.model';
 import { BasketService } from 'src/app/services/basket.service';
 
@@ -8,30 +9,42 @@ import { BasketService } from 'src/app/services/basket.service';
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.css'],
 })
-export class CheckoutComponent {
-  constructor(
-    public basketService: BasketService,
-    private router: Router,
-  ) {}
-
+export class CheckoutComponent implements OnInit {
+  total$ = new BehaviorSubject<number>(0);
+  serviceFee$ = new BehaviorSubject<number>(0);
+  finalTotal$ = new BehaviorSubject<number>(0);
   serviceFee = 0.1;
+
+  constructor(public basketService: BasketService) {}
 
   increaseOrder(item: Dish) {
     this.basketService.addItem(item);
+    this.updateTotals();
   }
 
   decreaseOrder(item: Dish) {
     this.basketService.removeItem(item);
+    this.updateTotals();
   }
 
-  onCheckout() {
-    const items = this.basketService.getItems();
-    for (let key in items) {
-      while (items[key].quantity > 0) {
-        this.basketService.removeItem(items[key].dish);
-      }
-    }
-    this.router.navigate(['/confirmation']);
+  ngOnInit() {
+    this.updateTotals();
+  }
+
+  updateTotals() {
+    const total = this.calculateTotal();
+    const serviceFee = this.calculateServiceFee();
+    const finalTotal = this.calculateFinalTotal();
+
+    this.animateValue(this.total$.value, total, 1000).subscribe(value =>
+      this.total$.next(value),
+    );
+    this.animateValue(this.serviceFee$.value, serviceFee, 1000).subscribe(
+      value => this.serviceFee$.next(value),
+    );
+    this.animateValue(this.finalTotal$.value, finalTotal, 1000).subscribe(
+      value => this.finalTotal$.next(value),
+    );
   }
 
   calculateTotal(): number {
@@ -52,5 +65,20 @@ export class CheckoutComponent {
     return parseFloat(
       (this.calculateTotal() + this.calculateServiceFee()).toFixed(1),
     );
+  }
+
+  animateValue(
+    start: number,
+    end: number,
+    duration: number,
+  ): Observable<number> {
+    const steps = duration / 100;
+    const stepValue = (end - start) / steps;
+    const counter = interval(100).pipe(
+      take(steps),
+      map(x => start + x * stepValue),
+    );
+
+    return counter;
   }
 }

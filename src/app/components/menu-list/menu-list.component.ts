@@ -8,7 +8,6 @@ import { BasketService } from 'src/app/services/basket.service';
   styleUrls: ['./menu-list.component.css'],
 })
 export class MenuListComponent {
-
   constructor(public basketService: BasketService) {}
 
   soupItems: Dish[] = [
@@ -22,7 +21,7 @@ export class MenuListComponent {
         { name: 'sesame(кунжут)' },
         { name: 'Green Onion' },
       ],
-      imageUrl: 'assets/images/icons/mate_logo.png',
+      imageUrl: 'assets/images/dishes/DALL·E Miso Soup.png',
       category: 'Soup',
     },
     {
@@ -36,7 +35,7 @@ export class MenuListComponent {
         { name: 'Seafood' },
         { name: 'Green Onion' },
       ],
-      imageUrl: 'assets/images/icons/mate_logo.png',
+      imageUrl: 'assets/images/dishes/DALL·E Tom Yum Soup.png',
       category: 'Soup',
     },
     {
