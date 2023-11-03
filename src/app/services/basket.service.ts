@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { Dish, Order, OrderItem } from 'src/app/models/menu.model';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {Dish, OrderItem} from 'src/app/models/menu.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BasketService {
-  private itemsSubject = new BehaviorSubject<{ [key: string]: OrderItem }>({});
+  private itemsSubject = new BehaviorSubject<OrderItem[]>([]);
 
   get items$() {
     return this.itemsSubject.asObservable();
@@ -16,32 +16,34 @@ export class BasketService {
   get order$() {
     return this.items$.pipe(
       map(items => {
-        const itemsArray: OrderItem[] = Object.values(items);
-        const total = itemsArray.reduce(
+        const total = items.reduce(
           (sum, item) => sum + item.dish.price * item.quantity,
           0,
         );
-        return { items: itemsArray, total };
+        return {items, total};
       }),
     );
   }
 
   addItem(item: Dish): void {
     const items = this.itemsSubject.getValue();
-    if (items[item.name]) {
-      items[item.name].quantity++;
+    const foundItem = items.find(i => i.dish.name === item.name);
+    if (foundItem) {
+      foundItem.quantity++;
     } else {
-      items[item.name] = { dish: item, quantity: 1 };
+      items.push({dish: item, quantity: 1});
     }
     this.itemsSubject.next(items);
   }
 
   removeItem(item: Dish): void {
     const items = this.itemsSubject.getValue();
-    if (items[item.name]?.quantity > 0) {
-      items[item.name].quantity--;
-      if (items[item.name].quantity === 0) {
-        delete items[item.name];
+    const foundItem = items.find(i => i.dish.name === item.name);
+    if (foundItem && foundItem.quantity > 0) {
+      foundItem.quantity--;
+      if (foundItem.quantity === 0) {
+        const index = items.indexOf(foundItem);
+        items.splice(index, 1);
       }
     }
     this.itemsSubject.next(items);
@@ -49,6 +51,6 @@ export class BasketService {
 
   hasItems(): boolean {
     const items = this.itemsSubject.getValue();
-    return Object.keys(items).length > 0;
+    return items.length > 0;
   }
 }

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable, timer, Subscription } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-import { Dish } from 'src/app/models/menu.model';
-import { BasketService } from 'src/app/services/basket.service';
+import {Component, OnInit} from '@angular/core';
+import {BehaviorSubject, Observable, Subscription, timer} from 'rxjs';
+import {map, take} from 'rxjs/operators';
+import {Dish} from 'src/app/models/menu.model';
+import {BasketService} from 'src/app/services/basket.service';
 
 @Component({
   selector: 'app-checkout',
@@ -14,6 +14,7 @@ export class CheckoutComponent implements OnInit {
   serviceFee$ = new BehaviorSubject<number>(0);
   finalTotal$ = new BehaviorSubject<number>(0);
   private subscription!: Subscription;
+  private serviceFeeRate = 0.1;
 
   constructor(public basketService: BasketService) {}
 
@@ -22,7 +23,7 @@ export class CheckoutComponent implements OnInit {
       this.animateValue(this.total$.value, order.total, 1000).subscribe(
         value => {
           this.total$.next(value);
-          const serviceFee = value * 0.1;
+          const serviceFee = value * this.serviceFeeRate; // Calculate service fee based on rate
           this.serviceFee$.next(serviceFee);
           this.finalTotal$.next(value + serviceFee);
         },
