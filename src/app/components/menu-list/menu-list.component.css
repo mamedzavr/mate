@@ -12,6 +12,10 @@
     padding: 10px 20px;
 }
 
+.checkout-button:focus {
+    outline: none;
+}
+
 @media (max-width: 768px) {
     .checkout-button {
         width: 100%;

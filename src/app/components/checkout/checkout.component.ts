@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {BehaviorSubject, Observable, Subscription, timer} from 'rxjs';
 import {map, take} from 'rxjs/operators';
 import {Dish} from 'src/app/models/menu.model';
@@ -16,18 +17,26 @@ export class CheckoutComponent implements OnInit {
   private subscription!: Subscription;
   private serviceFeeRate = 0.1;
 
-  constructor(public basketService: BasketService) {}
+  constructor(
+    public basketService: BasketService,
+    private router: Router,
+  ) {
+  }
 
   ngOnInit() {
     this.subscription = this.basketService.order$.subscribe(order => {
-      this.animateValue(this.total$.value, order.total, 1000).subscribe(
-        value => {
-          this.total$.next(value);
-          const serviceFee = value * this.serviceFeeRate; // Calculate service fee based on rate
-          this.serviceFee$.next(serviceFee);
-          this.finalTotal$.next(value + serviceFee);
-        },
-      );
+      if (order.total === 0) {
+        this.router.navigate(['/menu']);
+      } else {
+        this.animateValue(this.total$.value, order.total, 1000).subscribe(
+          value => {
+            this.total$.next(value);
+            const serviceFee = value * this.serviceFeeRate;
+            this.serviceFee$.next(serviceFee);
+            this.finalTotal$.next(value + serviceFee);
+          },
+        );
+      }
     });
   }
 
