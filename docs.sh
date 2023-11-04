@@ -1,3 +1,3 @@
 #!/bin/bash
 
-ng build --configuration production --output-path docs --base-href "/mate/"
+ng build --configuration production --output-path docs --base-href "/mate-fe/"
