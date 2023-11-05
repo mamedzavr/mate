@@ -1,29 +1,35 @@
-<div *ngIf="basketService.hasItems()" class="container">
-    <h2>Checkout</h2>
-    <div class="row">
-      <div *ngFor="let item of basketService.items$ | async" class="col-sm-6 col-md-4 col-lg-3 mb-3">
-            <div class="card custom-card">
-                <div class="card-body">
-                  <img [src]="item.dish.imageUrl" alt="{{ item.dish.name }}" class="card-img-top custom-card-img">
-                    <div class="row">
-                      <div class="col-12">
-                        <h5 class="card-title">{{ item.dish.name }}</h5>
-                        </div>
-                      <div class="col-12 text-left">
-                        <h6 class="card-subtitle mb-2 text-muted">&#8380;{{ item.dish.price }}</h6>
-                        </div>
-                    </div>
-                    <div class="order-count">
-                      <button (click)="decreaseOrder(item.dish)" class="btn btn-primary btn-small margin-right">
-                            -
-                        </button>
-                        <span class="margin-right number-display">
-                            {{ item.quantity }}
+<div class="container">
+  <div *ngFor="let item of basketService.items$ | async" [@fade] class="row mb-3">
+    <div class="col-2">
+      <div *ngIf="item.showControls; else quantityDisplay" class="order-count d-flex align-items-center">
+        <button (click)="decreaseOrder(item.dish)" class="btn btn-primary btn-small">
+          -
+        </button>
+        <span class="number-display text-center">
+                    {{ item.quantity }}
+                </span>
+        <button (click)="increaseOrder(item.dish)" class="btn btn-primary btn-small">
+          +
+        </button>
+      </div>
+      <ng-template #quantityDisplay>
+        <button (click)="item.showControls = !item.showControls" class="number-display btn btn-small">{{
+          item.quantity }}</button>
+      </ng-template>
+    </div>
+    <div [class.shift-right]="item.showControls" class="col-10">
+      <div class="row">
+        <div class="col-7">
+          <h5><strong>{{ item.dish.name }}</strong></h5>
+          <p>
+                        <span *ngFor="let ingredient of item.dish.ingredients; let isLast=last">
+                            {{ ingredient.name }}<span *ngIf="!isLast">, </span>
                         </span>
-                      <button (click)="increaseOrder(item.dish)" class="btn btn-primary btn-small">
-                            +
-                        </button>
-                    </div>
+          </p>
+          <p>&#8380;{{ (item.dish.price * item.quantity).toFixed(2) }}</p>
+        </div>
+        <div class="col-3">
+          <img [src]="item.dish.imageUrl" alt="{{ item.dish.name }}" class="item-image">
                 </div>
             </div>
         </div>

@@ -13,6 +13,7 @@ export interface Dish {
 export interface OrderItem {
   dish: Dish;
   quantity: number;
+  showControls?: boolean;
 }
 
 export interface Order {
