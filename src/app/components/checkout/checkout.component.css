@@ -24,6 +24,10 @@
   transition: transform 0.3s ease-out;
 }
 
+.custom-padding {
+  padding: 10px 5px;
+}
+
 .order-count {
     display: flex;
   justify-content: space-between;
