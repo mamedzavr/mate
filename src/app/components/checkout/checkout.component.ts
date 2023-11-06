@@ -2,8 +2,7 @@ import {animate, style, transition, trigger} from '@angular/animations';
 import {ViewportScroller} from '@angular/common';
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {BehaviorSubject, Observable, Subscription, timer} from 'rxjs';
-import {map, take} from 'rxjs/operators';
+import {BehaviorSubject, Subscription} from 'rxjs';
 import {Dish, OrderItem} from 'src/app/models/menu.model';
 import {BasketService} from 'src/app/services/basket.service';
 
@@ -15,10 +14,10 @@ import {BasketService} from 'src/app/services/basket.service';
     trigger('fade', [
       transition(':leave', [
         style({opacity: 1}),
-        animate('0.5s ease-out', style({opacity: 0}))
-      ])
-    ])
-  ]
+        animate('0.5s ease-out', style({opacity: 0})),
+      ]),
+    ]),
+  ],
 })
 export class CheckoutComponent implements OnInit {
   total$ = new BehaviorSubject<number>(0);
@@ -39,16 +38,12 @@ export class CheckoutComponent implements OnInit {
       if (order.total === 0) {
         this.router.navigate(['/menu']);
       } else {
-        this.animateValue(this.total$.value, order.total, 1000).subscribe(
-          value => {
-            this.total$.next(value);
-            const serviceFee =
-              Math.round(value * this.serviceFeeRate * 100) / 100;
-            this.serviceFee$.next(serviceFee);
-            const finalTotal = Math.round((value + serviceFee) * 100) / 100;
-            this.finalTotal$.next(finalTotal);
-          },
-        );
+        const serviceFee =
+          Math.round(order.total * this.serviceFeeRate * 100) / 100;
+        this.serviceFee$.next(serviceFee);
+        const finalTotal = Math.round((order.total + serviceFee) * 100) / 100;
+        this.finalTotal$.next(finalTotal);
+        this.total$.next(order.total);
       }
     });
   }
@@ -68,22 +63,7 @@ export class CheckoutComponent implements OnInit {
   toggleControls(item: OrderItem) {
     const viewportWidth = this.viewportScroller.getScrollPosition()[0];
     if (viewportWidth < 768) {
-      // Adjust this value based on your needs
       item.showControls = !item.showControls;
     }
-  }
-
-  animateValue(
-    start: number,
-    end: number,
-    duration: number,
-  ): Observable<number> {
-    return timer(0, duration / 100).pipe(
-      map(
-        elapsed =>
-          start + (end - start) * Math.min(elapsed / (duration / 100), 1),
-      ),
-      take(101),
-    );
   }
 }

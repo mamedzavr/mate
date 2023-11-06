@@ -18,12 +18,12 @@
     text-align: center;
 }
 
-.custom-card {
-    width: 18rem;
-    border-radius: 20px;
-}
-
 .custom-card-img {
     border-radius: 20px;
     margin-bottom: 20px;
+}
+
+.custom-card {
+  width: 100%;
+  border-radius: 20px;
 }
