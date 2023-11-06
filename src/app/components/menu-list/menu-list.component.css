@@ -1,5 +1,11 @@
 .custom-padding {
-    padding: 10px 5px; /* Adjust as needed */
+  padding: 10px 5px;
+  /* Adjust as needed */
+}
+
+.btn-primary {
+  background-color: #5d681c;
+  border-color: #5d681c;
 }
 
 .checkout-button {

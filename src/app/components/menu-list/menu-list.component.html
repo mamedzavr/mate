@@ -1,11 +1,15 @@
 <div class="container">
     <div *ngFor="let category of categories" class="custom-padding">
-        <h2>
+      <h2 (click)="selectedCategory = selectedCategory === category ? null : category" class="btn btn-primary">
             {{ category }}
         </h2>
-        <div class="row">
+      <div *ngIf="selectedCategory === category" @slideUpDown>
+        <div class="container">
+          <div class="row">
             <div class="col-md-4 custom-padding" *ngFor="let item of getItemsByCategory(category)">
-                <app-menu-item [item]="item"></app-menu-item>
+              <app-menu-item [item]="item"></app-menu-item>
+            </div>
+          </div>
             </div>
         </div>
     </div>
