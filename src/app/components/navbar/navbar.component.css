@@ -12,3 +12,29 @@
 .nav-item a {
   padding-left: 10px;
 }
+
+.btn.btn-secondary {
+  background-color: #9bb505;
+}
+
+.brand-logo {
+  height: 30px;
+  width: 30px;
+}
+
+.nav-right {
+  margin-left: auto;
+}
+
+.dropdown-container {
+  margin-right: 20px;
+}
+
+.dropdown-icon {
+  height: 20px;
+  width: 30px;
+}
+
+.dropdown-item {
+  padding: 0.25rem 1.5rem 0.25rem 0.75rem;
+}

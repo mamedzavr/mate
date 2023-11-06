@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { filter, map } from 'rxjs';
 
 @Component({
@@ -10,10 +11,12 @@ import { filter, map } from 'rxjs';
 export class NavbarComponent {
   isCollapsed = true;
   isLoginDialogOpen = false;
+  currentLanguage = 'ru';
 
   constructor(
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private translate: TranslateService
   ) {
     this.router.events
       .pipe(
@@ -36,5 +39,10 @@ export class NavbarComponent {
 
   closeLoginDialog() {
     this.isLoginDialogOpen = false;
+  }
+
+  useLanguage(language: string) {
+    this.translate.use(language);
+    this.currentLanguage = language;
   }
 }
