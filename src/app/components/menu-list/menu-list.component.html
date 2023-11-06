@@ -1,9 +1,9 @@
 <div class="container">
   <div *ngFor="let category of categories" class="custom-padding">
-    <h2 (click)="selectedCategory = selectedCategory === category ? null : category" class="btn btn-primary">
+    <h2 (click)="toggleCategory(category)" class="btn btn-primary">
       {{ category }}
     </h2>
-    <div *ngIf="selectedCategory === category" @slideUpDown>
+    <div *ngIf="isCategoryOpen(category)" @slideUpDown>
       <div class="container">
         <div class="row">
           <div *ngFor="let item of getItemsByCategory(category)" class="col-md-4 custom-padding">
