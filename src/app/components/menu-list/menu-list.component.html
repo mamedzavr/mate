@@ -1,20 +1,20 @@
 <div class="container">
-    <div *ngFor="let category of categories" class="custom-padding">
-      <h2 (click)="selectedCategory = selectedCategory === category ? null : category" class="btn btn-primary">
-            {{ category }}
-        </h2>
-      <div *ngIf="selectedCategory === category" @slideUpDown>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4 custom-padding" *ngFor="let item of getItemsByCategory(category)">
-              <app-menu-item [item]="item"></app-menu-item>
-            </div>
+  <div *ngFor="let category of categories" class="custom-padding">
+    <h2 (click)="selectedCategory = selectedCategory === category ? null : category" class="btn btn-primary">
+      {{ category }}
+    </h2>
+    <div *ngIf="selectedCategory === category" @slideUpDown>
+      <div class="container">
+        <div class="row">
+          <div *ngFor="let item of getItemsByCategory(category)" class="col-md-4 custom-padding">
+            <app-menu-item [item]="item"></app-menu-item>
           </div>
-            </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
-<button *ngIf="basketService.hasItems()" routerLink="/checkout" class="btn btn-primary checkout-button">
-    Корзина
+<button *ngIf="basketService.hasItems()" class="btn btn-primary checkout-button" routerLink="/checkout">
+  Корзина
 </button>

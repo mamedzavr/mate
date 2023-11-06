@@ -7,7 +7,7 @@ export interface Dish {
   price: number;
   ingredients: Ingredient[];
   category: string;
-  imageUrl: string; 
+  imageUrl: string;
 }
 
 export interface OrderItem {

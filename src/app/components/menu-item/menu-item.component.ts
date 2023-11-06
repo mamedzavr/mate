@@ -14,7 +14,8 @@ export class MenuItemComponent implements OnInit {
   itemCount: number = 0;
   private subscription!: Subscription;
 
-  constructor(public basketService: BasketService) {}
+  constructor(public basketService: BasketService) {
+  }
 
   ngOnInit(): void {
     this.subscription = this.basketService.items$.subscribe(items => {

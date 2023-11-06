@@ -7,10 +7,10 @@ import {CheckoutComponent} from './components/checkout/checkout.component';
 import {LoginDialogComponent} from './components/login-dialog/login-dialog.component';
 
 const routes: Routes = [
-  { path: 'contact', component: ContactComponent },
-  { path: 'menu', component: MenuListComponent },
-  { path: 'about', component: AboutUsComponent },
-  { path: 'checkout', component: CheckoutComponent },
+  {path: 'contact', component: ContactComponent},
+  {path: 'menu', component: MenuListComponent},
+  {path: 'about', component: AboutUsComponent},
+  {path: 'checkout', component: CheckoutComponent},
   {path: 'login', component: LoginDialogComponent},
 ];
 
@@ -24,4 +24,5 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}

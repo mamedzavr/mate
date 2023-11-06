@@ -1,11 +1,10 @@
 img {
-    transition: transform 600ms ease-out;
-    max-width: 200px;
-    max-height: 200px;
-    width: 100%; 
-  }
-  
-  .img-container {
-    overflow: hidden;
-  }
-  
+  transition: transform 600ms ease-out;
+  max-width: 200px;
+  max-height: 200px;
+  width: 100%;
+}
+
+.img-container {
+  overflow: hidden;
+}

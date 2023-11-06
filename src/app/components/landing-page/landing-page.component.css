@@ -1,9 +1,10 @@
 /* landing-page.component.css */
 h1 {
-    color: #333;
-    text-align: center;
-  }
-  p {
-    color: #666;
-    text-align: center;
-  }
+  color: #333;
+  text-align: center;
+}
+
+p {
+  color: #666;
+  text-align: center;
+}

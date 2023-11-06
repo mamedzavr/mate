@@ -1,14 +1,14 @@
 .active {
-    background-color: #5d681c;
-    color: rgb(223, 18, 18);
-    border-radius: 5px;
-    text-align: left;
+  background-color: #5d681c;
+  color: rgb(223, 18, 18);
+  border-radius: 5px;
+  text-align: left;
 }
 
 .active a {
-    color: white;
+  color: white;
 }
 
 .nav-item a {
-    padding-left: 10px;
+  padding-left: 10px;
 }

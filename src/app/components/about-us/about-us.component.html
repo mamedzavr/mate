@@ -1,11 +1,11 @@
 <div class="container">
-    <div class="row text-center" *ngFor="let image of images; let i = index">
-        <div class="col-md-8 img-container">
-            <img [src]="image" [style.transform]="'translateX(' + offsets[i] + '%)'" alt="Image"
-                class="img-responsive center-block" />
-        </div>
-        <div class="col-md-8">
-            <p>Текст между изображениями</p>
-        </div>
+  <div *ngFor="let image of images; let i = index" class="row text-center">
+    <div class="col-md-8 img-container">
+      <img [src]="image" [style.transform]="'translateX(' + offsets[i] + '%)'" alt="Image"
+           class="img-responsive center-block"/>
     </div>
+    <div class="col-md-8">
+      <p>Текст между изображениями</p>
+    </div>
+  </div>
 </div>
