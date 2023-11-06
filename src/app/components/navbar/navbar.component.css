@@ -15,6 +15,7 @@
 
 .btn.btn-secondary {
   background-color: #9bb505;
+  text-align: center;
 }
 
 .brand-logo {
@@ -36,5 +37,10 @@
 }
 
 .dropdown-item {
-  padding: 0.25rem 1.5rem 0.25rem 0.75rem;
+  padding: 0.25rem 0.75rem;
+}
+
+.nav-link {
+  width: 110px;
+  text-align: left;
 }

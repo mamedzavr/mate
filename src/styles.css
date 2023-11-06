@@ -1,11 +1,2 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.min.css';
-
-body {
-    background-color: #f2f2f2 !important;
-    /* This is a light grey color */
-}
-
-.navbar-container, .footer-container {
-    background-color: #ffffff; /* This is a white color */
-  }

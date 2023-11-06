@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { filter, map } from 'rxjs';
@@ -8,10 +8,10 @@ import { filter, map } from 'rxjs';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   isCollapsed = true;
   isLoginDialogOpen = false;
-  currentLanguage = 'ru';
+  currentLanguage = 'en';
 
   constructor(
     private router: Router,
@@ -31,6 +31,10 @@ export class NavbarComponent {
       .subscribe(route => {
         this.isLoginDialogOpen = route.snapshot.url.join('/').includes('login');
       });
+  }
+
+  ngOnInit() {
+    this.currentLanguage = localStorage.getItem('language') || 'en';
   }
 
   openLoginDialog() {
