@@ -1,7 +1,13 @@
-import {Component} from '@angular/core';
-import {Dish, getMenuItems} from '../../models/menu.model';
-import {BasketService} from 'src/app/services/basket.service';
-import {animate, state, style, transition, trigger,} from '@angular/animations';
+import { Component } from '@angular/core';
+import { Dish, getMenuItems } from '../../models/menu.model';
+import { BasketService } from 'src/app/services/basket.service';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-menu-list',
@@ -15,7 +21,7 @@ import {animate, state, style, transition, trigger,} from '@angular/animations';
           height: '0',
           opacity: '0',
           overflow: 'hidden',
-        }),
+        })
       ),
       state(
         '*',
@@ -23,7 +29,7 @@ import {animate, state, style, transition, trigger,} from '@angular/animations';
           height: '*',
           opacity: '1',
           overflow: 'auto',
-        }),
+        })
       ),
       transition('void <=> *', animate('600ms ease-in-out')),
     ]),
@@ -37,8 +43,7 @@ export class MenuListComponent {
     ...new Set(this.menuItems.map(item => item.category)),
   ];
 
-  constructor(public basketService: BasketService) {
-  }
+  constructor(public basketService: BasketService) {}
 
   getItemsByCategory(category: string): Dish[] {
     return this.menuItems.filter(item => item.category === category);

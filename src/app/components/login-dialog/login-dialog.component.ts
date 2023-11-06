@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {HttpClient} from '@angular/common/http';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login-dialog',
@@ -12,7 +12,7 @@ export class LoginDialogComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private http: HttpClient,
+    private http: HttpClient
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -22,7 +22,7 @@ export class LoginDialogComponent {
 
   login() {
     this.http
-      .get('http://localhost:3000', {withCredentials: true})
+      .get('http://localhost:3000', { withCredentials: true })
       .subscribe({
         next: data => {
           console.log(data);

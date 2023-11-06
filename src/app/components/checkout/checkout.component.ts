@@ -1,10 +1,10 @@
-import {animate, style, transition, trigger} from '@angular/animations';
-import {ViewportScroller} from '@angular/common';
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {BehaviorSubject, Subscription} from 'rxjs';
-import {Dish, OrderItem} from 'src/app/models/menu.model';
-import {BasketService} from 'src/app/services/basket.service';
+import { animate, style, transition, trigger } from '@angular/animations';
+import { ViewportScroller } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { Dish, OrderItem } from 'src/app/models/menu.model';
+import { BasketService } from 'src/app/services/basket.service';
 
 @Component({
   selector: 'app-checkout',
@@ -13,8 +13,8 @@ import {BasketService} from 'src/app/services/basket.service';
   animations: [
     trigger('fade', [
       transition(':leave', [
-        style({opacity: 1}),
-        animate('0.5s ease-out', style({opacity: 0})),
+        style({ opacity: 1 }),
+        animate('0.5s ease-out', style({ opacity: 0 })),
       ]),
     ]),
   ],
@@ -29,9 +29,8 @@ export class CheckoutComponent implements OnInit {
   constructor(
     public basketService: BasketService,
     private router: Router,
-    private viewportScroller: ViewportScroller,
-  ) {
-  }
+    private viewportScroller: ViewportScroller
+  ) {}
 
   ngOnInit() {
     this.subscription = this.basketService.order$.subscribe(order => {

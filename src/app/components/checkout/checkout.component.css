@@ -1,4 +1,5 @@
-.btn-small, .number-display {
+.btn-small,
+.number-display {
   width: 30px;
   height: 30px;
   display: flex;
@@ -12,7 +13,6 @@
   background-color: #5d681c;
   color: white;
 }
-
 
 .order-count .number-display {
   background-color: white;

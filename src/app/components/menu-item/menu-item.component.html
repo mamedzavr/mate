@@ -1,19 +1,31 @@
 <div class="card custom-card">
   <div class="card-body">
-    <img [src]="item.imageUrl" alt="{{ item.name }}" class="card-img-top custom-card-img">
+    <img
+      [src]="item.imageUrl"
+      alt="{{ item.name }}"
+      class="card-img-top custom-card-img" />
     <h5 class="card-title">{{ item.name }}</h5>
     <h6 class="card-subtitle mb-2 text-muted">&#8380;{{ item.price }}</h6>
-    <p class="card-text">
+    <p class="card-text"></p>
     <ul>
       <li *ngFor="let ingredient of item.ingredients">{{ ingredient.name }}</li>
     </ul>
-    <button (click)="increaseOrder()" *ngIf="itemCount === 0" class="btn btn-primary btn-small">Add to
-      Order
+    <button
+      (click)="increaseOrder()"
+      *ngIf="itemCount === 0"
+      class="btn btn-primary btn-small">
+      Add to Order
     </button>
     <div *ngIf="itemCount > 0" class="order-count">
-      <button (click)="decreaseOrder()" class="btn btn-primary btn-small margin-right">-</button>
+      <button
+        (click)="decreaseOrder()"
+        class="btn btn-primary btn-small margin-right">
+        -
+      </button>
       <span class="margin-right number-display">{{ itemCount }}</span>
-      <button (click)="increaseOrder()" class="btn btn-primary btn-small">+</button>
+      <button (click)="increaseOrder()" class="btn btn-primary btn-small">
+        +
+      </button>
     </div>
   </div>
 </div>

@@ -1,6 +1,6 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {LoginDialogComponent} from './login-dialog.component';
+import { LoginDialogComponent } from './login-dialog.component';
 
 describe('LoginDialogComponent', () => {
   let component: LoginDialogComponent;
@@ -8,7 +8,7 @@ describe('LoginDialogComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [LoginDialogComponent]
+      declarations: [LoginDialogComponent],
     });
     fixture = TestBed.createComponent(LoginDialogComponent);
     component = fixture.componentInstance;

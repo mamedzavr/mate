@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostListener, OnInit} from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-about-us',
@@ -32,8 +32,7 @@ export class AboutUsComponent implements OnInit {
     'assets/images/icons/mate_logo.png',
   ];
 
-  constructor(private el: ElementRef) {
-  }
+  constructor(private el: ElementRef) {}
 
   ngOnInit() {
     this.initializeOffsets();

@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Dish} from 'src/app/models/menu.model';
-import {BasketService} from 'src/app/services/basket.service';
-import {Subscription} from 'rxjs';
+import { Component, Input, OnInit } from '@angular/core';
+import { Dish } from 'src/app/models/menu.model';
+import { BasketService } from 'src/app/services/basket.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-menu-item',
@@ -14,8 +14,7 @@ export class MenuItemComponent implements OnInit {
   itemCount: number = 0;
   private subscription!: Subscription;
 
-  constructor(public basketService: BasketService) {
-  }
+  constructor(public basketService: BasketService) {}
 
   ngOnInit(): void {
     this.subscription = this.basketService.items$.subscribe(items => {

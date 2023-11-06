@@ -1,7 +1,7 @@
-import {TestBed} from '@angular/core/testing';
-import {CanActivateFn} from '@angular/router';
+import { TestBed } from '@angular/core/testing';
+import { CanActivateFn } from '@angular/router';
 
-import {checkoutGuard} from './checkout.guard';
+import { checkoutGuard } from './checkout.guard';
 
 describe('checkoutGuard', () => {
   const executeGuard: CanActivateFn = (...guardParameters) =>

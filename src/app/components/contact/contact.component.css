@@ -15,7 +15,10 @@
   border: none;
 }
 
-body, html, .container, .row {
+body,
+html,
+.container,
+.row {
   padding: 0;
   margin: 0;
 }

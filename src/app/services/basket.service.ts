@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
-import {map} from 'rxjs/operators';
-import {Dish, OrderItem} from 'src/app/models/menu.model';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Dish, OrderItem } from 'src/app/models/menu.model';
 
 @Injectable({
   providedIn: 'root',
@@ -18,10 +18,10 @@ export class BasketService {
       map(items => {
         const total = items.reduce(
           (sum, item) => sum + item.dish.price * item.quantity,
-          0,
+          0
         );
-        return {items, total};
-      }),
+        return { items, total };
+      })
     );
   }
 
@@ -31,7 +31,7 @@ export class BasketService {
     if (foundItem) {
       foundItem.quantity++;
     } else {
-      items.push({dish: item, quantity: 1});
+      items.push({ dish: item, quantity: 1 });
     }
     this.itemsSubject.next(items);
   }

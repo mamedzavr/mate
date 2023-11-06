@@ -6,7 +6,9 @@
     <div *ngIf="isCategoryOpen(category)" @slideUpDown>
       <div class="container">
         <div class="row">
-          <div *ngFor="let item of getItemsByCategory(category)" class="col-md-4 custom-padding">
+          <div
+            *ngFor="let item of getItemsByCategory(category)"
+            class="col-md-4 custom-padding">
             <app-menu-item [item]="item"></app-menu-item>
           </div>
         </div>
@@ -15,6 +17,9 @@
   </div>
 </div>
 
-<button *ngIf="basketService.hasItems()" class="btn btn-primary checkout-button" routerLink="/checkout">
+<button
+  *ngIf="basketService.hasItems()"
+  class="btn btn-primary checkout-button"
+  routerLink="/checkout">
   Корзина
 </button>

@@ -9,30 +9,30 @@
 }
 
 .checkout-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-    width: auto;
-    background-color: #5d681c;
-    padding: 10px 20px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  width: auto;
+  background-color: #5d681c;
+  padding: 10px 20px;
 }
 
 .checkout-button:focus {
-    outline: none;
+  outline: none;
 }
 
 @media (max-width: 768px) {
-    .checkout-button {
-        width: 100%;
-        bottom: 0;
-        right: 0;
-        padding: 10px 20px;
-    }
+  .checkout-button {
+    width: 100%;
+    bottom: 0;
+    right: 0;
+    padding: 10px 20px;
+  }
 }
 
 @media (min-width: 769px) {
-    .checkout-button {
-        padding: 15px 30px;
-    }
+  .checkout-button {
+    padding: 15px 30px;
+  }
 }

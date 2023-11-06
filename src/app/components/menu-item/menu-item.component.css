@@ -1,26 +1,26 @@
 .btn-small {
-    font-size: 0.8em;
-    background-color: #5d681c;
-    color: white;
+  font-size: 0.8em;
+  background-color: #5d681c;
+  color: white;
 }
 
 .margin-right {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .order-count {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .number-display {
-    width: 20px;
-    text-align: center;
+  width: 20px;
+  text-align: center;
 }
 
 .custom-card-img {
-    border-radius: 20px;
-    margin-bottom: 20px;
+  border-radius: 20px;
+  margin-bottom: 20px;
 }
 
 .custom-card {
